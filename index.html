@@ -4,218 +4,212 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>GUYS – Бутик подростковой одежды</title>
-
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
+  /* Сброс стилей */
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: Arial, sans-serif; background:#fefefe; color:#1a1a1a; line-height:1.5; scroll-behavior:smooth; }
 
-:root{
-  --accent:#ff6f61;
-  --dark:#1a1a1a;
-}
+  a { text-decoration:none; color:inherit; }
+  button { cursor:pointer; border:2px solid #ff6f61; background:transparent; padding:12px 24px; font-size:16px; font-weight:600; color:#ff6f61; border-radius:30px; transition:all 0.3s ease; }
+  button:hover { background:#ff6f61; color:#fff; box-shadow:0 4px 15px rgba(255,111,97,0.6); }
 
-body{
-  font-family:Arial,sans-serif;
-  background:#fff;
-  color:var(--dark);
-  line-height:1.5;
-}
+  /* HEADER */
+  header { position:sticky; top:0; background:#fff; border-bottom:3px solid #ff6f61; z-index:1000; display:flex; justify-content:center; align-items:center; padding:18px 50px; gap:60px; flex-wrap:wrap; }
+  .logo-centered { font-weight:900; font-family:'Arial Black', Arial, sans-serif; font-size:56px; display:flex; gap:10px; user-select:none; text-shadow:1px 1px 3px rgba(0,0,0,0.1); animation:logoPulse 3s ease-in-out infinite; }
+  @keyframes logoPulse { 0%,100% { text-shadow:1px 1px 3px rgba(0,0,0,0.1); transform:scale(1); } 50% { text-shadow:2px 2px 15px rgba(255,111,97,0.7); transform:scale(1.05); } }
+  .letter-g { color:#f7d507; } .letter-u { color:#6a2cff; } .letter-y { color:#2ba360; } .letter-s { color:#ff6f61; }
+  nav { display:flex; gap:35px; font-weight:700; font-size:17px; align-items:center; }
+  nav a { color:#1a1a1a; position:relative; transition:color 0.3s; }
+  nav a::after { content:''; position:absolute; bottom:-6px; left:0; width:0%; height:2px; background:#ff6f61; transition:width 0.3s; }
+  nav a:hover, nav a:focus { color:#ff6f61; }
+  nav a:hover::after, nav a:focus::after { width:100%; }
 
-a{text-decoration:none;color:inherit}
+  /* HERO SLIDER */
+  .hero { position:relative; overflow:hidden; height:75vh; max-height:800px; user-select:none; }
+  .slides { display:flex; width:300%; height:100%; transition:transform 0.7s ease-in-out; }
+  .slides img { width:100%; height:75vh; max-height:800px; object-fit:cover; filter:brightness(70%); transition:filter 0.5s; }
+  .slides img:hover { filter:brightness(85%); }
+  .hero-text { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); color:#fff; text-align:center; max-width:90%; }
+  .hero-text h1 { font-size:3.8rem; font-weight:900; text-shadow:3px 3px 15px rgba(0,0,0,0.7); margin-bottom:20px; }
 
-button{
-  border:2px solid var(--accent);
-  background:transparent;
-  padding:12px 24px;
-  border-radius:30px;
-  color:var(--accent);
-  font-weight:700;
-  transition:.3s;
-}
-button:hover{
-  background:var(--accent);
-  color:#fff;
-}
+  .slider-arrow { position:absolute; top:50%; transform:translateY(-50%); font-size:50px; color:#fff; background:rgba(0,0,0,0.3); padding:12px; border-radius:50%; cursor:pointer; user-select:none; transition:background 0.3s, transform 0.3s; z-index:10; box-shadow:0 2px 8px rgba(0,0,0,0.3); }
+  .slider-arrow:hover { background:rgba(255,111,97,0.9); transform:scale(1.2); }
+  .slider-arrow.left { left:20px; } .slider-arrow.right { right:20px; }
 
-/* HEADER */
-header{
-  position:sticky;
-  top:0;
-  background:#fff;
-  border-bottom:3px solid var(--accent);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:60px;
-  padding:18px 40px;
-  z-index:1000;
-}
+  .slider-dots { position:absolute; bottom:25px; left:50%; transform:translateX(-50%); display:flex; gap:16px; z-index:15; }
+  .slider-dots span { width:16px; height:16px; border-radius:50%; background:rgba(255,255,255,0.7); cursor:pointer; transition:background 0.3s, transform 0.3s; }
+  .slider-dots span.active { background:#ff6f61; transform:scale(1.3); box-shadow:0 0 8px rgba(255,111,97,0.7); }
 
-.logo-centered{
-  font-size:52px;
-  font-weight:900;
-  display:flex;
-  gap:8px;
-}
-.letter-g{color:#f7d507}
-.letter-u{color:#6a2cff}
-.letter-y{color:#2ba360}
-.letter-s{color:var(--accent)}
+  /* SECTIONS */
+  section { padding:60px 20px; max-width:1200px; margin:0 auto; }
 
-nav{display:flex;gap:30px;font-weight:700}
+  /* Categories */
+  .categories { display:flex; justify-content:space-between; gap:30px; flex-wrap:wrap; background:#fff0f0; border-radius:12px; box-shadow:0 5px 20px rgba(255,111,97,0.12); }
+  .category-card { flex:1 1 30%; background:#fff; border-radius:15px; box-shadow:0 4px 12px rgba(0,0,0,0.08); text-align:center; padding:20px; transition:transform 0.3s ease, box-shadow 0.3s ease; cursor:pointer; }
+  .category-card:hover { transform:translateY(-8px); box-shadow:0 15px 30px rgba(255,111,97,0.3); }
+  .category-card img { width:100%; max-width:320px; height:320px; object-fit:cover; border-radius:15px; margin-bottom:15px; }
+  .category-card h3 { font-size:1.7rem; color:#ff6f61; font-weight:700; margin-bottom:10px; }
 
-/* HERO */
-.hero{
-  height:70vh;
-  background:#ddd;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.hero h1{
-  color:#fff;
-  font-size:3rem;
-  text-shadow:2px 2px 15px rgba(0,0,0,.6);
-}
+  /* About */
+  .about { display:flex; gap:40px; align-items:center; flex-wrap:wrap; background:#f0f8ff; border-radius:15px; padding:40px 30px; box-shadow:0 8px 30px rgba(42,163,96,0.15); }
+  .about img { flex:1 1 450px; border-radius:15px; object-fit:cover; max-width:100%; }
+  .about-text { flex:1 1 450px; color:#2ba360; }
+  .about-text h2 { font-size:2.8rem; font-weight:900; margin-bottom:20px; color:#2ba360; }
+  .about-text p { font-size:1.2rem; line-height:1.6; }
 
-/* SECTIONS */
-section{
-  max-width:1200px;
-  margin:auto;
-  padding:60px 20px;
-}
+  /* Popular products */
+  .popular { background:#fff0f0; border-radius:15px; box-shadow:0 8px 30px rgba(255,111,97,0.15); text-align:center; }
+  .popular h2 { font-size:2.8rem; font-weight:900; margin-bottom:40px; color:#ff6f61; }
+  .products { display:flex; justify-content:space-between; gap:25px; flex-wrap:wrap; }
+  .product-card { background:#fff; border-radius:15px; box-shadow:0 6px 25px rgba(0,0,0,0.07); flex:1 1 30%; padding:20px; cursor:pointer; transition:transform 0.3s ease, box-shadow 0.3s ease; }
+  .product-card:hover { transform:translateY(-10px); box-shadow:0 20px 40px rgba(255,111,97,0.4); }
+  .product-card img { width:100%; height:320px; object-fit:cover; border-radius:15px; margin-bottom:15px; }
+  .product-card h4 { color:#ff6f61; font-weight:700; font-size:1.3rem; margin-bottom:10px; }
+  .product-card p { font-weight:600; font-size:1.1rem; margin-bottom:15px; }
 
-/* POPULAR */
-.popular{
-  background:#fff0f0;
-  border-radius:16px;
-  text-align:center;
-}
-.popular h2{
-  color:var(--accent);
-  font-size:2.5rem;
-  margin-bottom:40px;
-}
+  /* Footer */
+  footer { background:#1a1a1a; color:#fff; padding:40px 50px; text-align:center; font-size:16px; }
+  footer a { color:#ff6f61; margin:0 14px; transition:color 0.3s; }
+  footer a:hover { color:#ff3b2e; text-decoration:underline; }
 
-.products{
-  display:flex;
-  gap:25px;
-  flex-wrap:wrap;
-  justify-content:center;
-}
+  /* Adaptive */
+  @media (max-width:1024px) { .category-card { flex:1 1 45%; } .product-card { flex:1 1 45%; } }
+  @media (max-width:768px) { header { flex-direction:column; gap:15px; } .logo-centered { font-size:42px; } nav { gap:20px; font-size:15px; } .about { flex-direction:column; padding:20px; } .about img, .about-text { flex:1 1 100%; } .category-card, .product-card { flex:1 1 90%; } }
+  @media (max-width:480px) { .logo-centered { font-size:32px; gap:6px; } .hero-text h1 { font-size:2rem; } button { padding:10px 18px; font-size:14px; } }
 
-.product-card{
-  background:#fff;
-  border-radius:16px;
-  box-shadow:0 6px 20px rgba(0,0,0,.1);
-  padding:20px;
-  flex:1 1 280px;
-  max-width:300px;
-  transition:.3s;
-}
-.product-card:hover{
-  transform:translateY(-8px);
-}
-
-.product-card img{
-  width:100%;
-  height:260px;
-  object-fit:contain;
-  background:#f4f4f4;
-  border-radius:12px;
-  margin-bottom:15px;
-}
-
-.product-card h4{
-  color:var(--accent);
-  font-size:1.3rem;
-  margin-bottom:10px;
-}
-.product-card p{
-  font-weight:700;
-  margin-bottom:15px;
-}
-
-/* FOOTER */
-footer{
-  background:var(--dark);
-  color:#fff;
-  text-align:center;
-  padding:40px 20px;
-}
-footer a{color:var(--accent)}
-
-@media(max-width:768px){
-  header{flex-direction:column}
-  .logo-centered{font-size:38px}
-}
 </style>
 </head>
-
 <body>
 
 <header>
-  <a href="#" class="logo-centered">
+  <div class="logo-centered" aria-label="Логотип GUYS">
     <span class="letter-g">G</span>
     <span class="letter-u">u</span>
     <span class="letter-y">y</span>
     <span class="letter-s">s</span>
-  </a>
-
-  <nav>
-    <a href="#">Главная</a>
+  </div>
+  <nav aria-label="Основное меню">
+    <a href="#hero">Главная</a>
+    <a href="#categories">Коллекции</a>
+    <a href="#about">О нас</a>
     <a href="#popular">Популярное</a>
     <a href="#footer">Контакты</a>
   </nav>
 </header>
 
-<section class="hero">
-  <h1>Новая коллекция 2026</h1>
+<!-- HERO SLIDER -->
+<section class="hero" id="hero">
+  <div class="slides" role="list">
+    <img src="images/jacket-122.jpg" alt="Коллекция подростковой одежды - красная куртка" role="listitem" />
+    <img src="images/jacket-152.jpg" alt="Коллекция подростковой одежды - синяя куртка" role="listitem" />
+    <img src="images/jacket-164-176.jpg" alt="Коллекция подростковой одежды - зелёная куртка" role="listitem" />
+  </div>
+  <div class="hero-text">
+    <h1>Новая коллекция весна/лето 2026</h1>
+    <button>Смотреть коллекцию</button>
+  </div>
+  <div class="slider-arrow left" role="button" tabindex="0">&#10094;</div>
+  <div class="slider-arrow right" role="button" tabindex="0">&#10095;</div>
+  <div class="slider-dots" role="tablist">
+    <span class="dot active" role="tab" tabindex="0" aria-selected="true"></span>
+    <span class="dot" role="tab" tabindex="-1" aria-selected="false"></span>
+    <span class="dot" role="tab" tabindex="-1" aria-selected="false"></span>
+  </div>
 </section>
 
+<!-- CATEGORIES -->
+<section class="categories" id="categories">
+  <div class="category-card">
+    <img src="images/jacket-122.jpg" alt="Мужская одежда">
+    <h3>Мужская одежда</h3>
+    <button>Смотреть</button>
+  </div>
+  <div class="category-card">
+    <img src="images/jacket-152.jpg" alt="Женская одежда">
+    <h3>Женская одежда</h3>
+    <button>Смотреть</button>
+  </div>
+  <div class="category-card">
+    <img src="images/jacket-164-176.jpg" alt="Аксессуары">
+    <h3>Аксессуары</h3>
+    <button>Смотреть</button>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <img src="images/jacket-152.jpg" alt="Бутик подростковой одежды GUYS">
+  <div class="about-text">
+    <h2>О нас</h2>
+    <p>GUYS – бутик для молодых, кто ценит современный минимализм. Стильная одежда для подростков от 1 до 18 лет.</p>
+  </div>
+</section>
+
+<!-- POPULAR -->
 <section class="popular" id="popular">
-  <h2>Популярные куртки</h2>
-
+  <h2>Популярное</h2>
   <div class="products">
-
-    <!-- Куртка 122 -->
     <div class="product-card">
-      <img src="images/products/jacket-122.jpg" alt="Куртка 122 см">
-      <h4>Зимняя куртка</h4>
-      <p>122 см · 31 000 ₽</p>
+      <img src="images/jacket-122.jpg" alt="Куртка 122 см">
+      <h4>Куртка</h4>
+      <p>122 см – 31000 ₽</p>
       <button>Купить</button>
     </div>
-
-    <!-- Куртка 152 -->
     <div class="product-card">
-      <img src="images/products/jacket-152.jpg" alt="Куртка 152 см">
-      <h4>Зимняя куртка</h4>
-      <p>152 см · 25 000 ₸</p>
+      <img src="images/jacket-152.jpg" alt="Куртка 152 см">
+      <h4>Куртка</h4>
+      <p>152 см – 25000 ₽</p>
       <button>Купить</button>
     </div>
-
-    <!-- Куртка 164-176 -->
     <div class="product-card">
-      <img src="images/products/jacket-164-176.jpg" alt="Куртка 164-176 см">
-      <h4>Зимняя куртка</h4>
-      <p>
-        <span style="text-decoration:line-through;color:#999">
-          25 000 ₸
-        </span><br>
-        <strong style="color:#ff6f61">15 000 ₸</strong>
-      </p>
+      <img src="images/jacket-164-176.jpg" alt="Куртка 164-176 см">
+      <h4>Куртка</h4>
+      <p>164-176 см – 15000 ₽</p>
       <button>Купить</button>
     </div>
-
   </div>
 </section>
 
 <footer id="footer">
-  <p>© 2025 GUYS</p>
+  <p>© 2025 GUYS. Все права защищены.</p>
   <p>
     <a href="mailto:info@guys.com">info@guys.com</a> |
-    <a href="tel:+79001234567">+7 900 123-45-67</a>
+    <a href="tel:+79001234567">+7 (900) 123-45-67</a> |
+    <a href="#">Instagram</a> |
+    <a href="#">ВКонтакте</a>
   </p>
 </footer>
+
+<script>
+  const slides = document.querySelector('.slides');
+  const dots = document.querySelectorAll('.slider-dots span');
+  const leftArrow = document.querySelector('.slider-arrow.left');
+  const rightArrow = document.querySelector('.slider-arrow.right');
+  let currentIndex = 0;
+  const totalSlides = dots.length;
+
+  function updateSlider() {
+    slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+    dots.forEach((dot, idx) => {
+      dot.classList.toggle('active', idx===currentIndex);
+      dot.setAttribute('aria-selected', idx===currentIndex);
+      dot.tabIndex = idx===currentIndex?0:-1;
+    });
+  }
+
+  function nextSlide(){ currentIndex = (currentIndex + 1) % totalSlides; updateSlider(); }
+  function prevSlide(){ currentIndex = (currentIndex - 1 + totalSlides) % totalSlides; updateSlider(); }
+
+  rightArrow.addEventListener('click', nextSlide);
+  leftArrow.addEventListener('click', prevSlide);
+
+  dots.forEach((dot, idx)=>{
+    dot.addEventListener('click', ()=>{ currentIndex=idx; updateSlider(); });
+    dot.addEventListener('keydown',(e)=>{ if(e.key==='Enter'||e.key===' '){ currentIndex=idx; updateSlider(); } });
+  });
+
+  setInterval(nextSlide,5000);
+</script>
 
 </body>
 </html>
