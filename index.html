@@ -1,172 +1,117 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GUYS – Бутик подростковой одежды</title>
 <style>
-  /* Сброс стилей */
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family: Arial, sans-serif; background:#fefefe; color:#1a1a1a; line-height:1.5; scroll-behavior:smooth; }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Arial',sans-serif;background:#fdfdfd;color:#111;line-height:1.5;}
+  a{text-decoration:none;color:inherit;}
+  button{cursor:pointer;border:none;padding:12px 25px;font-size:16px;font-weight:700;border-radius:30px;background:#ff6f61;color:#fff;transition:0.3s;}
+  button:hover{background:#ff856f;transform:scale(1.05);}
 
-  a { text-decoration:none; color:inherit; }
-  button { cursor:pointer; border:2px solid #ff6f61; background:transparent; padding:12px 24px; font-size:16px; font-weight:600; color:#ff6f61; border-radius:30px; transition:all 0.3s ease; }
-  button:hover { background:#ff6f61; color:#fff; box-shadow:0 4px 15px rgba(255,111,97,0.6); }
+  header{position:sticky;top:0;background:#fff;border-bottom:3px solid #ff6f61;display:flex;justify-content:space-between;align-items:center;padding:15px 50px;flex-wrap:wrap;z-index:1000;}
+  .logo{font-weight:900;font-size:50px;display:flex;gap:5px;user-select:none;}
+  .logo span.g{color:#f7d507;}
+  .logo span.u{color:#6a2cff;}
+  .logo span.y{color:#2ba360;}
+  .logo span.s{color:#ff6f61;}
+  nav{display:flex;gap:30px;font-weight:600;font-size:16px;align-items:center;flex-wrap:wrap;}
+  nav a{position:relative;transition:0.3s;}
+  nav a::after{content:'';position:absolute;bottom:-5px;left:0;width:0;height:2px;background:#ff6f61;transition:0.3s;}
+  nav a:hover::after{width:100%;}
 
-  /* HEADER */
-  header { position:sticky; top:0; background:#fff; border-bottom:3px solid #ff6f61; z-index:1000; display:flex; justify-content:center; align-items:center; padding:18px 50px; gap:60px; flex-wrap:wrap; }
-  .logo-centered { font-weight:900; font-family:'Arial Black', Arial, sans-serif; font-size:56px; display:flex; gap:10px; user-select:none; text-shadow:1px 1px 3px rgba(0,0,0,0.1); animation:logoPulse 3s ease-in-out infinite; }
-  @keyframes logoPulse { 0%,100% { text-shadow:1px 1px 3px rgba(0,0,0,0.1); transform:scale(1); } 50% { text-shadow:2px 2px 15px rgba(255,111,97,0.7); transform:scale(1.05); } }
-  .letter-g { color:#f7d507; } .letter-u { color:#6a2cff; } .letter-y { color:#2ba360; } .letter-s { color:#ff6f61; }
-  nav { display:flex; gap:35px; font-weight:700; font-size:17px; align-items:center; }
-  nav a { color:#1a1a1a; position:relative; transition:color 0.3s; }
-  nav a::after { content:''; position:absolute; bottom:-6px; left:0; width:0%; height:2px; background:#ff6f61; transition:width 0.3s; }
-  nav a:hover, nav a:focus { color:#ff6f61; }
-  nav a:hover::after, nav a:focus::after { width:100%; }
+  .hero{position:relative;overflow:hidden;height:75vh;max-height:800px;}
+  .slides{display:flex;width:300%;height:100%;transition:transform 0.7s ease-in-out;}
+  .slides img{width:100%;height:75vh;object-fit:cover;filter:brightness(70%);transition:0.5s;}
+  .slides img:hover{filter:brightness(85%);}
+  .hero-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;text-align:center;}
+  .hero-text h1{font-size:3.5rem;font-weight:900;text-shadow:3px 3px 15px rgba(0,0,0,0.6);margin-bottom:20px;animation:fadeInDown 1s;}
+  .hero-text button{font-size:18px;padding:12px 30px;}
+  @keyframes fadeInDown{0%{opacity:0;transform:translateY(-30px);}100%{opacity:1;transform:translateY(0);}}
 
-  /* HERO SLIDER */
-  .hero { position:relative; overflow:hidden; height:75vh; max-height:800px; user-select:none; }
-  .slides { display:flex; width:300%; height:100%; transition:transform 0.7s ease-in-out; }
-  .slides img { width:100%; height:75vh; max-height:800px; object-fit:cover; filter:brightness(70%); transition:filter 0.5s; }
-  .slides img:hover { filter:brightness(85%); }
-  .hero-text { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); color:#fff; text-align:center; max-width:90%; }
-  .hero-text h1 { font-size:3.8rem; font-weight:900; text-shadow:3px 3px 15px rgba(0,0,0,0.7); margin-bottom:20px; }
+  .slider-arrow{position:absolute;top:50%;transform:translateY(-50%);font-size:50px;color:#fff;background:rgba(0,0,0,0.3);padding:12px;border-radius:50%;cursor:pointer;transition:0.3s;z-index:10;}
+  .slider-arrow:hover{background:#ff6f61;transform:scale(1.2);}
+  .slider-arrow.left{left:20px;}
+  .slider-arrow.right{right:20px;}
+  .slider-dots{position:absolute;bottom:25px;left:50%;transform:translateX(-50%);display:flex;gap:12px;z-index:15;}
+  .slider-dots span{width:14px;height:14px;border-radius:50%;background:rgba(255,255,255,0.7);cursor:pointer;transition:0.3s;}
+  .slider-dots span.active{background:#ff6f61;transform:scale(1.3);box-shadow:0 0 8px rgba(255,111,97,0.6);}
 
-  .slider-arrow { position:absolute; top:50%; transform:translateY(-50%); font-size:50px; color:#fff; background:rgba(0,0,0,0.3); padding:12px; border-radius:50%; cursor:pointer; user-select:none; transition:background 0.3s, transform 0.3s; z-index:10; box-shadow:0 2px 8px rgba(0,0,0,0.3); }
-  .slider-arrow:hover { background:rgba(255,111,97,0.9); transform:scale(1.2); }
-  .slider-arrow.left { left:20px; } .slider-arrow.right { right:20px; }
+  section{padding:60px 20px;max-width:1200px;margin:0 auto;}
+  h2{font-size:2.5rem;font-weight:900;margin-bottom:40px;text-align:center;color:#ff6f61;}
 
-  .slider-dots { position:absolute; bottom:25px; left:50%; transform:translateX(-50%); display:flex; gap:16px; z-index:15; }
-  .slider-dots span { width:16px; height:16px; border-radius:50%; background:rgba(255,255,255,0.7); cursor:pointer; transition:background 0.3s, transform 0.3s; }
-  .slider-dots span.active { background:#ff6f61; transform:scale(1.3); box-shadow:0 0 8px rgba(255,111,97,0.7); }
+  .products{display:flex;flex-wrap:wrap;gap:25px;justify-content:center;}
+  .product-card{background:#fff;border-radius:15px;box-shadow:0 6px 20px rgba(0,0,0,0.07);flex:1 1 22%;padding:20px;cursor:pointer;transition:0.3s;text-align:center;}
+  .product-card:hover{transform:translateY(-10px);box-shadow:0 20px 40px rgba(255,111,97,0.4);}
+  .product-card img{width:100%;height:280px;object-fit:cover;border-radius:15px;margin-bottom:15px;}
+  .product-card h4{color:#ff6f61;font-weight:700;font-size:1.2rem;margin-bottom:10px;}
+  .product-card p{font-weight:600;font-size:1.1rem;margin-bottom:15px;}
 
-  /* SECTIONS */
-  section { padding:60px 20px; max-width:1200px; margin:0 auto; }
+  .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);justify-content:center;align-items:center;z-index:999;animation:fadeIn 0.5s;}
+  .modal-content{background:#fff;padding:30px;border-radius:15px;max-width:400px;width:90%;text-align:center;animation:scaleIn 0.4s;}
+  @keyframes fadeIn{0%{opacity:0;}100%{opacity:1;}}
+  @keyframes scaleIn{0%{transform:scale(0.8);}100%{transform:scale(1);}}
 
-  /* Categories */
-  .categories { display:flex; justify-content:space-between; gap:30px; flex-wrap:wrap; background:#fff0f0; border-radius:12px; box-shadow:0 5px 20px rgba(255,111,97,0.12); }
-  .category-card { flex:1 1 30%; background:#fff; border-radius:15px; box-shadow:0 4px 12px rgba(0,0,0,0.08); text-align:center; padding:20px; transition:transform 0.3s ease, box-shadow 0.3s ease; cursor:pointer; }
-  .category-card:hover { transform:translateY(-8px); box-shadow:0 15px 30px rgba(255,111,97,0.3); }
-  .category-card img { width:100%; max-width:320px; height:320px; object-fit:cover; border-radius:15px; margin-bottom:15px; }
-  .category-card h3 { font-size:1.7rem; color:#ff6f61; font-weight:700; margin-bottom:10px; }
+  .about{display:flex;gap:40px;align-items:center;flex-wrap:wrap;background:#f0f8ff;border-radius:15px;padding:40px 30px;box-shadow:0 8px 30px rgba(42,163,96,0.15);}
+  .about img{flex:1 1 450px;border-radius:15px;object-fit:cover;max-width:100%;}
+  .about-text{flex:1 1 450px;color:#2ba360;}
+  .about-text h2{font-size:2.5rem;font-weight:900;margin-bottom:20px;color:#2ba360;}
+  .about-text p{font-size:1.15rem;line-height:1.6;}
 
-  /* About */
-  .about { display:flex; gap:40px; align-items:center; flex-wrap:wrap; background:#f0f8ff; border-radius:15px; padding:40px 30px; box-shadow:0 8px 30px rgba(42,163,96,0.15); }
-  .about img { flex:1 1 450px; border-radius:15px; object-fit:cover; max-width:100%; }
-  .about-text { flex:1 1 450px; color:#2ba360; }
-  .about-text h2 { font-size:2.8rem; font-weight:900; margin-bottom:20px; color:#2ba360; }
-  .about-text p { font-size:1.2rem; line-height:1.6; }
+  footer{background:#111;color:#fff;padding:40px 50px;text-align:center;font-size:16px;}
+  footer a{color:#ff6f61;margin:0 14px;transition:0.3s;}
+  footer a:hover{color:#ff856f;text-decoration:underline;}
 
-  /* Popular products */
-  .popular { background:#fff0f0; border-radius:15px; box-shadow:0 8px 30px rgba(255,111,97,0.15); text-align:center; }
-  .popular h2 { font-size:2.8rem; font-weight:900; margin-bottom:40px; color:#ff6f61; }
-  .products { display:flex; justify-content:space-between; gap:25px; flex-wrap:wrap; }
-  .product-card { background:#fff; border-radius:15px; box-shadow:0 6px 25px rgba(0,0,0,0.07); flex:1 1 30%; padding:20px; cursor:pointer; transition:transform 0.3s ease, box-shadow 0.3s ease; }
-  .product-card:hover { transform:translateY(-10px); box-shadow:0 20px 40px rgba(255,111,97,0.4); }
-  .product-card img { width:100%; height:320px; object-fit:cover; border-radius:15px; margin-bottom:15px; }
-  .product-card h4 { color:#ff6f61; font-weight:700; font-size:1.3rem; margin-bottom:10px; }
-  .product-card p { font-weight:600; font-size:1.1rem; margin-bottom:15px; }
-
-  /* Footer */
-  footer { background:#1a1a1a; color:#fff; padding:40px 50px; text-align:center; font-size:16px; }
-  footer a { color:#ff6f61; margin:0 14px; transition:color 0.3s; }
-  footer a:hover { color:#ff3b2e; text-decoration:underline; }
-
-  /* Adaptive */
-  @media (max-width:1024px) { .category-card { flex:1 1 45%; } .product-card { flex:1 1 45%; } }
-  @media (max-width:768px) { header { flex-direction:column; gap:15px; } .logo-centered { font-size:42px; } nav { gap:20px; font-size:15px; } .about { flex-direction:column; padding:20px; } .about img, .about-text { flex:1 1 100%; } .category-card, .product-card { flex:1 1 90%; } }
-  @media (max-width:480px) { .logo-centered { font-size:32px; gap:6px; } .hero-text h1 { font-size:2rem; } button { padding:10px 18px; font-size:14px; } }
-
+  @media(max-width:1024px){.product-card{flex:1 1 45%;}.about{flex-direction:column;}.about img,.about-text{flex:1 1 100%;}}
+  @media(max-width:768px){header{flex-direction:column;gap:15px;}.logo{font-size:42px;} nav{gap:20px;font-size:15px;} .product-card{flex:1 1 90%;}}
+  @media(max-width:480px){.logo{font-size:32px;} .hero-text h1{font-size:2rem;} button{padding:10px 18px;font-size:14px;}}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="logo-centered" aria-label="Логотип GUYS">
-    <span class="letter-g">G</span>
-    <span class="letter-u">u</span>
-    <span class="letter-y">y</span>
-    <span class="letter-s">s</span>
+  <div class="logo">
+    <span class="g">G</span><span class="u">u</span><span class="y">y</span><span class="s">s</span>
   </div>
-  <nav aria-label="Основное меню">
+  <nav>
     <a href="#hero">Главная</a>
-    <a href="#categories">Коллекции</a>
-    <a href="#about">О нас</a>
     <a href="#popular">Популярное</a>
+    <a href="#about">О нас</a>
     <a href="#footer">Контакты</a>
   </nav>
 </header>
 
-<!-- HERO SLIDER -->
 <section class="hero" id="hero">
-  <div class="slides" role="list">
-    <img src="images/jacket-122.jpg" alt="Коллекция подростковой одежды - красная куртка" role="listitem" />
-    <img src="images/jacket-152.jpg" alt="Коллекция подростковой одежды - синяя куртка" role="listitem" />
-    <img src="images/jacket-164-176.jpg" alt="Коллекция подростковой одежды - зелёная куртка" role="listitem" />
+  <div class="slides">
+    <img src="jacket-122.jpg" alt="Куртка красная подростковая">
+    <img src="jacket-152.jpg" alt="Куртка синяя подростковая">
+    <img src="jacket-164-176.jpg" alt="Куртка зеленая подростковая">
   </div>
   <div class="hero-text">
-    <h1>Новая коллекция весна/лето 2026</h1>
-    <button>Смотреть коллекцию</button>
+    <h1>Новая коллекция GUYS 2026</h1>
+    <button onclick="alert('Скоро добавим коллекцию!')">Смотреть коллекцию</button>
   </div>
-  <div class="slider-arrow left" role="button" tabindex="0">&#10094;</div>
-  <div class="slider-arrow right" role="button" tabindex="0">&#10095;</div>
-  <div class="slider-dots" role="tablist">
-    <span class="dot active" role="tab" tabindex="0" aria-selected="true"></span>
-    <span class="dot" role="tab" tabindex="-1" aria-selected="false"></span>
-    <span class="dot" role="tab" tabindex="-1" aria-selected="false"></span>
-  </div>
-</section>
-
-<!-- CATEGORIES -->
-<section class="categories" id="categories">
-  <div class="category-card">
-    <img src="images/jacket-122.jpg" alt="Мужская одежда">
-    <h3>Мужская одежда</h3>
-    <button>Смотреть</button>
-  </div>
-  <div class="category-card">
-    <img src="images/jacket-152.jpg" alt="Женская одежда">
-    <h3>Женская одежда</h3>
-    <button>Смотреть</button>
-  </div>
-  <div class="category-card">
-    <img src="images/jacket-164-176.jpg" alt="Аксессуары">
-    <h3>Аксессуары</h3>
-    <button>Смотреть</button>
+  <div class="slider-arrow left">&#10094;</div>
+  <div class="slider-arrow right">&#10095;</div>
+  <div class="slider-dots">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
   </div>
 </section>
 
-<!-- ABOUT -->
+<section class="popular" id="popular">
+  <h2>Популярные товары</h2>
+  <div class="products" id="products-grid"></div>
+</section>
+
 <section class="about" id="about">
-  <img src="images/jacket-152.jpg" alt="Бутик подростковой одежды GUYS">
+  <img src="https://via.placeholder.com/600x400" alt="Бутик GUYS">
   <div class="about-text">
     <h2>О нас</h2>
-    <p>GUYS – бутик для молодых, кто ценит современный минимализм. Стильная одежда для подростков от 1 до 18 лет.</p>
-  </div>
-</section>
-
-<!-- POPULAR -->
-<section class="popular" id="popular">
-  <h2>Популярное</h2>
-  <div class="products">
-    <div class="product-card">
-      <img src="images/jacket-122.jpg" alt="Куртка 122 см">
-      <h4>Куртка</h4>
-      <p>122 см – 31000 ₽</p>
-      <button>Купить</button>
-    </div>
-    <div class="product-card">
-      <img src="images/jacket-152.jpg" alt="Куртка 152 см">
-      <h4>Куртка</h4>
-      <p>152 см – 25000 ₽</p>
-      <button>Купить</button>
-    </div>
-    <div class="product-card">
-      <img src="images/jacket-164-176.jpg" alt="Куртка 164-176 см">
-      <h4>Куртка</h4>
-      <p>164-176 см – 15000 ₽</p>
-      <button>Купить</button>
-    </div>
+    <p>GUYS – это бутик для молодых, которые ценят современный минимализм. У нас стильная одежда для подростков и молодежи.</p>
   </div>
 </section>
 
@@ -180,37 +125,46 @@
   </p>
 </footer>
 
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <p>Товар доступен для просмотра.</p>
+    <button onclick="closeModal()">Закрыть</button>
+  </div>
+</div>
+
 <script>
-  const slides = document.querySelector('.slides');
-  const dots = document.querySelectorAll('.slider-dots span');
-  const leftArrow = document.querySelector('.slider-arrow.left');
-  const rightArrow = document.querySelector('.slider-arrow.right');
-  let currentIndex = 0;
-  const totalSlides = dots.length;
+  const slides=document.querySelector('.slides');
+  const dots=document.querySelectorAll('.slider-dots span');
+  const leftArrow=document.querySelector('.slider-arrow.left');
+  const rightArrow=document.querySelector('.slider-arrow.right');
+  let currentIndex=0;
+  function updateSlider(){slides.style.transform=`translateX(-${currentIndex*100}%)`;dots.forEach((dot,idx)=>{dot.classList.toggle('active',idx===currentIndex);});}
+  function nextSlide(){currentIndex=(currentIndex+1)%dots.length;updateSlider();}
+  function prevSlide(){currentIndex=(currentIndex-1+dots.length)%dots.length;updateSlider();}
+  rightArrow.addEventListener('click',nextSlide);
+  leftArrow.addEventListener('click',prevSlide);
+  dots.forEach((dot,idx)=>{dot.addEventListener('click',()=>{currentIndex=idx;updateSlider();});});
+  setInterval(nextSlide,5000);
 
-  function updateSlider() {
-    slides.style.transform = `translateX(-${currentIndex * 100}%)`;
-    dots.forEach((dot, idx) => {
-      dot.classList.toggle('active', idx===currentIndex);
-      dot.setAttribute('aria-selected', idx===currentIndex);
-      dot.tabIndex = idx===currentIndex?0:-1;
-    });
-  }
-
-  function nextSlide(){ currentIndex = (currentIndex + 1) % totalSlides; updateSlider(); }
-  function prevSlide(){ currentIndex = (currentIndex - 1 + totalSlides) % totalSlides; updateSlider(); }
-
-  rightArrow.addEventListener('click', nextSlide);
-  leftArrow.addEventListener('click', prevSlide);
-
-  dots.forEach((dot, idx)=>{
-    dot.addEventListener('click', ()=>{ currentIndex=idx; updateSlider(); });
-    dot.addEventListener('keydown',(e)=>{ if(e.key==='Enter'||e.key===' '){ currentIndex=idx; updateSlider(); } });
+  const products=[
+    {name:"Куртка",price:"4700 ₽",img:"jacket-122.jpg"},
+    {name:"Куртка",price:"4900 ₽",img:"jacket-152.jpg"},
+    {name:"Куртка",price:"5200 ₽",img:"jacket-164-176.jpg"},
+    {name:"Худи",price:"3200 ₽",img:"https://via.placeholder.com/200x250"},
+    {name:"Футболка",price:"1200 ₽",img:"https://via.placeholder.com/200x250"},
+    {name:"Брюки",price:"2200 ₽",img:"https://via.placeholder.com/200x250"}
+  ];
+  const grid=document.getElementById('products-grid');
+  products.forEach(p=>{
+    const card=document.createElement('div');
+    card.className='product-card';
+    card.innerHTML=`<img src="${p.img}" alt="${p.name}"><h4>${p.name}</h4><p>${p.price}</p><button onclick="openModal()">Купить</button>`;
+    grid.appendChild(card);
   });
 
-  setInterval(nextSlide,5000);
+  function openModal(){document.getElementById('modal').style.display='flex';}
+  function closeModal(){document.getElementById('modal').style.display='none';}
 </script>
 
 </body>
 </html>
- 
