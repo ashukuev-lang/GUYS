@@ -1,0 +1,24 @@
+<div class="product-card">
+  <img src="images/jacket-122.jpg" alt="Куртка Красный">
+  <h4>Куртка</h4>
+  <p>Цвет: Красный</p>
+  <label for="size-red">Размер:</label>
+  <select id="size-red">
+    <option value="S">S</option>
+    <option value="M">M</option>
+    <option value="L">L</option>
+    <option value="XL">XL</option>
+  </select>
+  <button onclick="buyJacket('Красный', 'size-red')">Купить</button>
+</div>
+
+<script>
+function buyJacket(color, sizeId) {
+  const phone = '87474901715'; // Ваш WhatsApp номер
+  const sizeSelect = document.getElementById(sizeId);
+  const size = sizeSelect.value;
+  const message = `Здравствуйте! Я хочу купить куртку цвета ${color}, размер ${size}.`;
+  const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+  window.open(url, '_blank');
+}
+</script>
